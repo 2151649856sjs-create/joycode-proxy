@@ -1,5 +1,7 @@
 # joycode-proxy
 
+> 📘 English documentation: [README.en.md](./README.en.md)
+
 把 **JoyCode（京东云 JoyCoder 积分）** 反代成一个 OpenAI 兼容的 HTTP 服务，再通过一个 DSH provider 插件把它的积分池接进 DSH，当作 agent 的模型后端。整体思路与 `qoder-proxy` / `dsh-llm-qoder` 完全一致，只是后端换成了 JoyCode 的「color gateway」协议。
 
 ## 架构
