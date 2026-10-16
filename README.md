@@ -55,8 +55,10 @@ JoyCode IDE 的请求签名与鉴权都在它自带的 `extension.js` 里明文�
 > macOS `~/Library/Application Support/JoyCode/User/globalStorage/state.vscdb`；
 > Linux `~/.config/JoyCode/User/globalStorage/state.vscdb`）。
 > 读 `ItemTable` 表里 key 为 `JoyCoder.IDE` 的那一行，其 JSON 的
-> `jdhLoginInfo` 里就有 `ptKey` / `colorBaseUrl` / `masterBaseUrl` / `tenant`。
+> `joyCoderUser` 里就有 `ptKey` / `colorBaseUrl` / `masterBaseUrl` / `tenant`。
 > 把这些填进 `.env`（见 `.env.example`）。**`.env` 已在 `.gitignore` 里，绝不要提交。**
+>
+> 不想手动抠？跑 `npm run setup`，它会自动从本机 IDE 登录态读出凭据写进 `.env`。
 
 ## 模型列表（后端实时返回）
 
@@ -82,26 +84,19 @@ curl.exe -s http://127.0.0.1:8318/v1/chat/completions `
   -d '{\"model\":\"JoyAI-Code-1.6\",\"messages\":[{\"role\":\"user\",\"content\":\"reply exactly PONG\"}]}'
 ```
 
-## 接 DSH
-
-1. 把 `dsh-plugin` 用 junction 挂到 web profile：`profiles\web\node_modules\dsh-llm-joycode` → 本目录 `dsh-plugin`。
-2. 在 `profiles\web\cordis.patch.yml` 末尾追加：
-
-```yaml
-- insert:
-    - id: llm-joycode
-      name: dsh-llm-joycode
-```
-
-3. 重启 DSH web，模型选择器里应出现 `joycode` provider（5 个模型）。
-
 ## 快速开始
 
 ```bash
 git clone <this-repo> && cd joycode-proxy
-cp .env.example .env      # 然后填入你自己的 ptKey / tenant
+npm run setup             # 自动从本机 JoyCode IDE 登录态读出 ptKey / tenant 写进 .env
 npm start
 ```
+
+> 没有装 JoyCode IDE？手动也行：
+> ```bash
+> cp .env.example .env      # 然后填入你自己的 ptKey / tenant
+> npm start
+> ```
 
 验证：
 
@@ -116,15 +111,25 @@ curl -s http://127.0.0.1:8318/v1/chat/completions \
 
 ## 接 DSH
 
+一条命令即可完成挂载（自动建 junction + 追加 patch 条目，幂等）：
+
+```bash
+npm run install:dsh          # 等价于 node install-dsh-plugin.mjs
+# 可选：指定 profile / DSH_HOME
+DSH_PROFILE=web DSH_HOME=/path/to/.dsh node install-dsh-plugin.mjs
+```
+
+手动方式：
+
 1. 把 `dsh-plugin/` 挂进你的 DSH profile（例如用 junction / symlink 放到
    `<DSH_HOME>/profiles/web/node_modules/dsh-llm-joycode`，或直接 `dsh plugin add` 该目录）。
 2. 在 `<DSH_HOME>/profiles/web/cordis.patch.yml` 末尾追加：
 
-```yaml
-- insert:
-    - id: llm-joycode
-      name: dsh-llm-joycode
-```
+   ```yaml
+   - insert:
+       - id: llm-joycode
+         name: dsh-llm-joycode
+   ```
 
 3. 重启 DSH，模型选择器里应出现 `joycode` provider（5 个模型）。
 

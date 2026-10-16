@@ -28,7 +28,9 @@
   ],
   "scripts": {
     "start": "node server.mjs",
-    "check": "node --check server.mjs"
+    "check": "node --check server.mjs",
+    "setup": "node setup.mjs",
+    "install:dsh": "node install-dsh-plugin.mjs"
   },
   "repository": {
     "type": "git",
