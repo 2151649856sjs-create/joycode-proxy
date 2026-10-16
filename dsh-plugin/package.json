@@ -1,0 +1,49 @@
+{
+  "name": "dsh-llm-joycode",
+  "version": "1.0.0",
+  "description": "DSH model-provider plugin: register the JoyCode (JD Cloud JoyCoder) credit pool (via joycode-proxy) as a provider in the DSH model picker.",
+  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "joycode",
+    "joycoder",
+    "llm",
+    "provider"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/joycode-proxy.git",
+    "directory": "dsh-plugin"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": "*",
+    "@deepseek-ai/dsh-llm-pi-ai": "*",
+    "@deepseek-ai/dsh-llm": "*",
+    "@earendil-works/pi-ai": "*"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/schemastery": { "optional": true },
+    "@deepseek-ai/dsh-llm-pi-ai": { "optional": true },
+    "@deepseek-ai/dsh-llm": { "optional": true },
+    "@earendil-works/pi-ai": { "optional": true }
+  }
+}

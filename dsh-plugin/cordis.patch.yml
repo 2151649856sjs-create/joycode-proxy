@@ -1,0 +1,5 @@
+# Register the JoyCode provider without changing the profile's default model.
+# Requires joycode-proxy to be running (see ../server.mjs).
+- insert:
+    - id: llm-joycode
+      name: dsh-llm-joycode

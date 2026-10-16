@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Local environment / credentials — NEVER commit this
+.env
+.env.local
+*.local
+
+# Logs
+*.log
+*.err
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/

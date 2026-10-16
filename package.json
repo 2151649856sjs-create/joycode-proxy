@@ -1,0 +1,41 @@
+{
+  "name": "joycode-proxy",
+  "version": "1.0.0",
+  "description": "OpenAI-compatible local proxy that exposes your JoyCode (JD Cloud JoyCoder) credits as a standard /v1/chat/completions API, plus a DSH model-provider plugin.",
+  "type": "module",
+  "main": "server.mjs",
+  "license": "MIT",
+  "keywords": [
+    "joycode",
+    "joycoder",
+    "jd-cloud",
+    "openai-compatible",
+    "proxy",
+    "llm",
+    "dsh",
+    "deepseek-harness",
+    "credits"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "server.mjs",
+    "README.md",
+    "LICENSE",
+    "dsh-plugin",
+    ".env.example"
+  ],
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/joycode-proxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OWNER/joycode-proxy/issues"
+  },
+  "homepage": "https://github.com/OWNER/joycode-proxy#readme"
+}
